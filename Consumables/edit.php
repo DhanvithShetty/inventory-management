@@ -10,7 +10,6 @@ $connection = new mysqli($servername,$username,$password,$database);
 $id = "";
 $name = "";
 $quantity = "";
-$price = "";
 
 $errorMessage = "";
 $successMessage = "";
@@ -34,21 +33,19 @@ if( $_SERVER['REQUEST_METHOD'] == 'GET') {
 
     $name = $row["name"];
     $quantity = $row["quantity"];
-    $price = $row["price"];
 
 }else{
     $id = $_POST["id"];
     $name = $_POST["name"];
     $quantity = $_POST["quantity"];
-    $price = $_POST["price"];
 
     do {
-        if(empty($id) || empty($name) || empty($quantity) || empty($price)) {
+        if(empty($id) || empty($name) || empty($quantity)) {
             $errorMessage = "All the fields are required";
             break;
         }
 
-        $sql = "UPDATE consumables SET item_name = '$name', quantity = '$quantity', price = '$price' WHERE consumable_id = $id";
+        $sql = "UPDATE consumables SET item_name = '$name', quantity = '$quantity' WHERE consumable_id = $id";
         
         $result = $connection->query($sql);
         
@@ -57,7 +54,7 @@ if( $_SERVER['REQUEST_METHOD'] == 'GET') {
             break;
         }
 
-        $successMessage = "Item updated successfully";
+        $successMessage = "Consumable Item updated successfully";
 
         header("location: /dbms/Consumables/index.php");
         exit;
@@ -104,12 +101,6 @@ if( $_SERVER['REQUEST_METHOD'] == 'GET') {
                 <label class="col-sm-3 col-form-label">Quantity</label>
                 <div class="col-sm-6">
                     <input type="text" class="form-control" name="quantity" value="<?php echo $quantity; ?>">
-                </div>
-            </div>
-            <div class="row mb-3">
-                <label class="col-sm-3 col-form-label">Price</label>
-                <div class="col-sm-6">
-                    <input type="text" class="form-control" name="price" value="<?php echo $price; ?>">
                 </div>
             </div>
             <?php

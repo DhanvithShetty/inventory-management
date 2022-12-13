@@ -9,7 +9,6 @@ $connection = new mysqli($servername,$username,$password,$database);
 
 $name = "";
 $quantity = "";
-$price = "";
 
 $errorMessage = "";
 $successMessage = "";
@@ -17,16 +16,15 @@ $successMessage = "";
 if( $_SERVER['REQUEST_METHOD'] == 'POST' ) {
     $name = $_POST['name'];
     $quantity = $_POST['quantity'];
-    $price = $_POST['price'];
 
     do{
-        if(empty($name) || empty($quantity) || empty($price)) {
+        if(empty($name) || empty($quantity)) {
             $errorMessage = "All the fields are required";
             break;
         }
 
         //Insert new item into the database
-        $sql = "INSERT INTO consumables (item_name, quantity, price) VALUES ('$name', '$quantity','$price')";
+        $sql = "INSERT INTO consumables (item_name, quantity) VALUES ('$name', '$quantity')";
         $result = $connection->query($sql);
 
         if(!$result){
@@ -37,7 +35,6 @@ if( $_SERVER['REQUEST_METHOD'] == 'POST' ) {
 
         $name = "";
         $quantity = "";
-        $price = "";
 
         $successMessage = "Consumable added successfully";
 
@@ -87,12 +84,6 @@ if( $_SERVER['REQUEST_METHOD'] == 'POST' ) {
                     <input type="text" class="form-control" name="quantity" value="<?php echo $quantity; ?>">
                 </div>
             </div>
-            <div class="row mb-3">
-                <label class="col-sm-3 col-form-label">Price</label>
-                <div class="col-sm-6">
-                    <input type="text" class="form-control" name="price" value="<?php echo $price; ?>">
-                </div>
-            </div>
             <?php
                 if(!empty($successMessage)) {
                 echo "
@@ -117,6 +108,5 @@ if( $_SERVER['REQUEST_METHOD'] == 'POST' ) {
             </div>
         </form>
     </div>
-
 </body>
 </html>
