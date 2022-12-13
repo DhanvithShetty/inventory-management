@@ -7,17 +7,17 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css">
 </head>
 <body>
+    <button class="btn btn-primary" onclick="location.href='../home.php'">Back</button>
     <div class = "container my-5">
-        <h2 class="text-center my-5">Consumable Table</h2>
+        <h2 class="text-center my-5">Consumables Table</h2>
         <a class="btn btn-primary mb-5" href="create.php" role="button">Add Consumable</a>
         <br>
         <table class="table">
             <thead>
                 <tr>
-                    <th>Consumables ID</th>
+                    <th>Consumable ID</th>
                     <th>Item Name</th>
                     <th>Quantity</th>
-                    <th>Price</th>
                     <th>Action</th>
                 </tr>
             </thead>
@@ -47,7 +47,6 @@
                             <td>$row[consumable_id]</td>
                             <td>$row[item_name]</td>
                             <td>$row[quantity]</td>
-                            <td>$row[price]</td>
                             <td>
                                 <a class='btn btn-primary btn-sm' href='/dbms/Consumables/edit.php?id=$row[consumable_id]'>Edit</a>
                                 <a class='btn btn-danger btn-sm' href='/dbms/Consumables/delete.php?id=$row[consumable_id]'>Delete</a>
