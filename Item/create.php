@@ -7,26 +7,24 @@ $database = "inventory_management";
 
 $connection = new mysqli($servername,$username,$password,$database);
 
+$type = "";
 $name = "";
-$brand = "";
-$price = "";
 
 $errorMessage = "";
 $successMessage = "";
 
 if( $_SERVER['REQUEST_METHOD'] == 'POST' ) {
+    $type = $_POST['type'];
     $name = $_POST['name'];
-    $brand = $_POST['brand'];
-    $price = $_POST['price'];
 
     do{
-        if(empty($name) || empty($brand) || empty($price)) {
+        if(empty($type) || empty($name)) {
             $errorMessage = "All the fields are required";
             break;
         }
 
         //Insert new item into the database
-        $sql = "INSERT INTO item (item_name, brand, price) VALUES ('$name', '$brand','$price')";
+        $sql = "INSERT INTO item (item_type, item_name) VALUES ('$type', '$name')";
         $result = $connection->query($sql);
 
         if(!$result){
@@ -35,9 +33,8 @@ if( $_SERVER['REQUEST_METHOD'] == 'POST' ) {
         }
 
 
+        $type = "";
         $name = "";
-        $brand = "";
-        $price = "";
 
         $successMessage = "Item added successfully";
 
@@ -46,10 +43,6 @@ if( $_SERVER['REQUEST_METHOD'] == 'POST' ) {
 
     }while(false);
 }
-
-
-
-
 
 ?>
 <html lang="en">
@@ -76,21 +69,15 @@ if( $_SERVER['REQUEST_METHOD'] == 'POST' ) {
         ?>
         <form method="post">
             <div class="row mb-3">
+                <label class="col-sm-3 col-form-label">Item Type</label>
+                <div class="col-sm-6">
+                    <input type="text" class="form-control" name="type" value="<?php echo $type; ?>">
+                </div>
+            </div>
+            <div class="row mb-3">
                 <label class="col-sm-3 col-form-label">Item Name</label>
                 <div class="col-sm-6">
                     <input type="text" class="form-control" name="name" value="<?php echo $name; ?>">
-                </div>
-            </div>
-            <div class="row mb-3">
-                <label class="col-sm-3 col-form-label">Brand</label>
-                <div class="col-sm-6">
-                    <input type="text" class="form-control" name="brand" value="<?php echo $brand; ?>">
-                </div>
-            </div>
-            <div class="row mb-3">
-                <label class="col-sm-3 col-form-label">Price</label>
-                <div class="col-sm-6">
-                    <input type="text" class="form-control" name="price" value="<?php echo $price; ?>">
                 </div>
             </div>
             <?php

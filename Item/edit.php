@@ -8,9 +8,8 @@ $database = "inventory_management";
 $connection = new mysqli($servername,$username,$password,$database);
 
 $id = "";
+$type = "";
 $name = "";
-$brand = "";
-$price = "";
 
 $errorMessage = "";
 $successMessage = "";
@@ -32,23 +31,21 @@ if( $_SERVER['REQUEST_METHOD'] == 'GET') {
         exit;
     }
 
+    $type = $row["type"];
     $name = $row["name"];
-    $brand = $row["brand"];
-    $price = $row["price"];
 
 }else{
     $id = $_POST["id"];
+    $type = $_POST["type"];
     $name = $_POST["name"];
-    $brand = $_POST["brand"];
-    $price = $_POST["price"];
 
     do {
-        if(empty($id) || empty($name) || empty($brand) || empty($price)) {
+        if(empty($id) || empty($type) || empty($name)) {
             $errorMessage = "All the fields are required";
             break;
         }
 
-        $sql = "UPDATE item SET item_name = '$name', brand = '$brand', price = '$price' WHERE item_id = $id";
+        $sql = "UPDATE item SET item_type = '$type', item_name = '$name' WHERE item_id = $id";
         
         $result = $connection->query($sql);
         
@@ -95,21 +92,15 @@ if( $_SERVER['REQUEST_METHOD'] == 'GET') {
         <form method="post">
             <input type="hidden" name="id" value="<?php echo $id; ?>">
             <div class="row mb-3">
+                <label class="col-sm-3 col-form-label">Item Type</label>
+                <div class="col-sm-6">
+                    <input type="text" class="form-control" name="type" value="<?php echo $type; ?>">
+                </div>
+            </div>
+            <div class="row mb-3">
                 <label class="col-sm-3 col-form-label">Item Name</label>
                 <div class="col-sm-6">
                     <input type="text" class="form-control" name="name" value="<?php echo $name; ?>">
-                </div>
-            </div>
-            <div class="row mb-3">
-                <label class="col-sm-3 col-form-label">Brand</label>
-                <div class="col-sm-6">
-                    <input type="text" class="form-control" name="brand" value="<?php echo $brand; ?>">
-                </div>
-            </div>
-            <div class="row mb-3">
-                <label class="col-sm-3 col-form-label">Price</label>
-                <div class="col-sm-6">
-                    <input type="text" class="form-control" name="price" value="<?php echo $price; ?>">
                 </div>
             </div>
             <?php
