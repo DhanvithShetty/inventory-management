@@ -7,17 +7,17 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css">
 </head>
 <body>
+    <button class="btn btn-primary" onclick="location.href='../home.php'">Back</button>
     <div class = "container my-5">
-        <h2 class="text-center my-5">Item Table</h2>
-        <a class="btn btn-primary mb-5" href="create.php" role="button">Add Item</a>
+        <h2 class="text-center my-5">Consumables Table</h2>
+        <a class="btn btn-primary mb-5" href="create.php" role="button">Add Consumable</a>
         <br>
         <table class="table">
             <thead>
                 <tr>
-                    <th>Item ID</th>
+                    <th>Consumable ID</th>
                     <th>Item Name</th>
-                    <th>Brand</th>
-                    <th>Price</th>
+                    <th>Quantity</th>
                     <th>Action</th>
                 </tr>
             </thead>
@@ -34,7 +34,7 @@
                         die("Connection failed: ". $connection->connect_error);
                     }
 
-                    $sql = "SELECT * FROM `item`";
+                    $sql = "SELECT * FROM `consumables`";
                     $result = $connection->query($sql);
 
                     if(!$result) {
@@ -44,13 +44,12 @@
                 while ($row = $result->fetch_assoc()) {
                     echo "
                         <tr>
-                            <td>$row[item_id]</td>
+                            <td>$row[consumable_id]</td>
                             <td>$row[item_name]</td>
-                            <td>$row[brand]</td>
-                            <td>$row[price]</td>
+                            <td>$row[quantity]</td>
                             <td>
-                                <a class='btn btn-primary btn-sm' href='/dbms/Item/edit.php?id=$row[item_id]'>Edit</a>
-                                <a class='btn btn-danger btn-sm' href='/dbms/Item/delete.php?id=$row[item_id]'>Delete</a>
+                                <a class='btn btn-primary btn-sm' href='/dbms/Consumables/edit.php?id=$row[consumable_id]'>Edit</a>
+                                <a class='btn btn-danger btn-sm' href='/dbms/Consumables/delete.php?id=$row[consumable_id]'>Delete</a>
                             </td>
                         </tr>
                         ";
