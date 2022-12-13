@@ -9,15 +9,15 @@
 <body>
     <button class="btn btn-primary" onclick="location.href='../home.php'">Back</button>
     <div class = "container my-5">
-        <h2 class="text-center my-5">Consumables Table</h2>
-        <a class="btn btn-primary mb-5" href="create.php" role="button">Add Consumable</a>
+        <h2 class="text-center my-5">Item Table</h2>
+        <a class="btn btn-primary mb-5" href="create.php" role="button">Add Item</a>
         <br>
         <table class="table">
             <thead>
                 <tr>
-                    <th>Consumable ID</th>
+                    <th>Item ID</th>
+                    <th>Item Type</th>
                     <th>Item Name</th>
-                    <th>Quantity</th>
                     <th>Action</th>
                 </tr>
             </thead>
@@ -34,7 +34,7 @@
                         die("Connection failed: ". $connection->connect_error);
                     }
 
-                    $sql = "SELECT * FROM `consumables`";
+                    $sql = "SELECT * FROM `item`";
                     $result = $connection->query($sql);
 
                     if(!$result) {
@@ -44,12 +44,12 @@
                 while ($row = $result->fetch_assoc()) {
                     echo "
                         <tr>
-                            <td>$row[consumable_id]</td>
+                            <td>$row[item_id]</td>
+                            <td>$row[item_type]</td>
                             <td>$row[item_name]</td>
-                            <td>$row[quantity]</td>
                             <td>
-                                <a class='btn btn-primary btn-sm' href='/dbms/Consumables/edit.php?id=$row[consumable_id]'>Edit</a>
-                                <a class='btn btn-danger btn-sm' href='/dbms/Consumables/delete.php?id=$row[consumable_id]'>Delete</a>
+                                <a class='btn btn-primary btn-sm' href='/dbms/Item/edit.php?id=$row[item_id]'>Edit</a>
+                                <a class='btn btn-danger btn-sm' href='/dbms/Item/delete.php?id=$row[item_id]'>Delete</a>
                             </td>
                         </tr>
                         ";
