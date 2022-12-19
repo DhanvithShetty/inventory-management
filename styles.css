@@ -4,7 +4,7 @@
   box-sizing: border-box;
 }
 .text-container {
-  margin-top: 224px;
+  margin-top: 196px;
   margin-bottom: 96px;
 }
 .btn-wrapper {
@@ -69,4 +69,7 @@
 .btn-text {
   font-weight: bold;
   font-size: 24px;
+}
+.my-gradient {
+  background: linear-gradient(40deg, #a1ffce, #faffd1) !important;
 }

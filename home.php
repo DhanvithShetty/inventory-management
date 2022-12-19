@@ -6,7 +6,7 @@
     <title>Inventory Management</title>
     <link rel="stylesheet" href="styles.css">
 </head>
-<body>
+<body style = "background: linear-gradient(40deg, #a1ffce, #faffd1)">
     <div>
         <div class="text-container">
             <h1 class="main-text">Inventory Management</h1>
