@@ -30,11 +30,13 @@ if( $_SERVER['REQUEST_METHOD'] == 'GET') {
         header("location: /dbms/Consumables/index.php");
         exit;
     }
-
+    if(isset($_GET["name"]) || isset($_GET["quantity"])) {
     $name = $row["name"];
     $quantity = $row["quantity"];
+}
 
-}else{
+}else{    
+    
     $id = $_POST["id"];
     $name = $_POST["name"];
     $quantity = $_POST["quantity"];
@@ -76,9 +78,9 @@ if( $_SERVER['REQUEST_METHOD'] == 'GET') {
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 </head>
-<body>
+<body style = "background: linear-gradient(40deg, #a1ffce, #faffd1)">
     <div class="container my-5">
-        <h2>Add Consumables</h2>
+        <h2>Edit Consumables</h2>
         <?php
             if (!empty($errorMessage)) {
                 echo "
