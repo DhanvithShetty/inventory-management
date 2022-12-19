@@ -7,26 +7,27 @@ $database = "inventory_management";
 
 $connection = new mysqli($servername,$username,$password,$database);
 
+$inv_id = "";
 $item_id = "";
-$quantity = "";
 $condition = "";
 
 $errorMessage = "";
 $successMessage = "";
 
 if( $_SERVER['REQUEST_METHOD'] == 'POST' ) {
+    
+    $inv_id = $_POST['inv_id'];
     $item_id = $_POST['item_id'];
-    $quantity = $_POST['quantity'];
     $condition = $_POST['condition'];
 
     do{
-        if(empty($item_id) || empty($quantity) || empty($condition)) {
+        if(empty($item_id) || empty($condition) || empty($inv_id)) {
             $errorMessage = "All the fields are required";
             break;
         }
 
         //Insert new item into the database
-        $sql = "INSERT INTO inventory (item_id, quantity, condition) VALUES ('$item_id', '$quantity', '$condition')";
+        $sql = "INSERT INTO `inventory` (`inv_id`, `item_id`, `condition`) VALUES ('$inv_id', '$item_id', '$condition')";
         $result = $connection->query($sql);
 
         if(!$result){
@@ -36,7 +37,7 @@ if( $_SERVER['REQUEST_METHOD'] == 'POST' ) {
 
 
         $item_id = "";
-        $quantity = "";
+        $inv_id = "";
         $condition = "";
 
         $successMessage = "Inventory Item added successfully";
@@ -61,7 +62,7 @@ if( $_SERVER['REQUEST_METHOD'] == 'POST' ) {
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 </head>
-<body>
+<body style = "background: linear-gradient(40deg, #a1ffce, #faffd1)">
     <div class="container my-5">
         <h2>Add Inventory Item</h2>
         <?php
@@ -76,15 +77,15 @@ if( $_SERVER['REQUEST_METHOD'] == 'POST' ) {
         ?>
         <form method="post">
             <div class="row mb-3">
-                <label class="col-sm-3 col-form-label">Item ID</label>
+                <label class="col-sm-3 col-form-label">Inventory ID</label>
                 <div class="col-sm-6">
-                    <input type="text" class="form-control" name="item_id" value="<?php echo $item_id; ?>">
+                    <input type="text" class="form-control" name="inv_id" value="<?php echo $inv_id; ?>">
                 </div>
             </div>
             <div class="row mb-3">
-                <label class="col-sm-3 col-form-label">Quantity</label>
+                <label class="col-sm-3 col-form-label">Item ID</label>
                 <div class="col-sm-6">
-                    <input type="text" class="form-control" name="quantity" value="<?php echo $quantity; ?>">
+                    <input type="text" class="form-control" name="item_id" value="<?php echo $item_id; ?>">
                 </div>
             </div>
             <div class="row mb-3">
