@@ -8,8 +8,8 @@ $database = "inventory_management";
 $connection = new mysqli($servername,$username,$password,$database);
 
 $id = "";
+$inv_id = "";
 $item_id = "";
-$quantity = "";
 $condition = "";
 
 $errorMessage = "";
@@ -23,7 +23,7 @@ if( $_SERVER['REQUEST_METHOD'] == 'GET') {
 
     $id = $_GET["id"];
 
-    $sql = "SELECT * FROM inventory WHERE inv_id = $id";
+    $sql = "SELECT * FROM inventory WHERE sno = $id";
     $result = $connection->query($sql);
     $row = $result->fetch_assoc();
     
@@ -32,24 +32,31 @@ if( $_SERVER['REQUEST_METHOD'] == 'GET') {
         exit;
     }
 
-    $item_id = $row["item_id"];
-    $quantity = $row["quantity"];
-    $condition = $row["condition"];
+    if (isset($_GET["inv_id"]) || isset($_GET["item_id"]) || isset($_GET["condition"])) {
+        $inv_id = $row["inv_id"];
+        $item_id = $row["item_id"];
+        $condition = $row["condition"];
+    }
 
 }else{
 
-    $id = $_POST["id"];
-    $item_id = $_POST["item_id"];
-    $quantity = $_POST["quantity"];
-    $condition = $row["condition"];
+    if(isset($_POST["id"]) || isset($_POST["inv_id"]) || isset($_POST["item_id"]) || isset($_POST["condition"])){
+
+        $id = $_POST["id"];
+        $inv_id = $_POST["inv_id"];
+        $item_id = $_POST["item_id"];
+        $condition = $_POST["condition"];
+
+    }
+    
 
     do {
-        if(empty($id) || empty($item_id) || empty($quantity) || empty($condition)) {
+        if(empty($inv_id) || empty($condition)) {
             $errorMessage = "All the fields are required";
             break;
         }
 
-        $sql = "UPDATE inventory SET item_id = '$item_id', quantity = '$quantity', condition = '$condition' WHERE inv_id = $id";
+        $sql = "UPDATE `inventory` SET `inv_id` = '$inv_id', `condition` = '$condition' WHERE `sno` = $id";    
         
         $result = $connection->query($sql);
         
@@ -58,17 +65,15 @@ if( $_SERVER['REQUEST_METHOD'] == 'GET') {
             break;
         }
 
-        $successMessage = "Consumable Item updated successfully";
+        $successMessage = "Inventory Item updated successfully";
 
-        header("location: /dbms/Consumables/index.php");
+        header("location: /dbms/Inventory/index.php");
         exit;
 
     } while (false);
 
 
 }
-
-
 
 ?>
 <html lang="en">
@@ -80,9 +85,9 @@ if( $_SERVER['REQUEST_METHOD'] == 'GET') {
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 </head>
-<body>
+<body style = "background: linear-gradient(40deg, #a1ffce, #faffd1)">
     <div class="container my-5">
-        <h2>Add Consumables</h2>
+        <h2>Edit Inventory Item</h2>
         <?php
             if (!empty($errorMessage)) {
                 echo "
@@ -96,15 +101,9 @@ if( $_SERVER['REQUEST_METHOD'] == 'GET') {
         <form method="post">
             <input type="hidden" name="id" value="<?php echo $id; ?>">
             <div class="row mb-3">
-                <label class="col-sm-3 col-form-label">Item ID</label>
+                <label class="col-sm-3 col-form-label">Inv ID</label>
                 <div class="col-sm-6">
-                    <input type="text" class="form-control" name="item_id" value="<?php echo $item_id; ?>">
-                </div>
-            </div>
-            <div class="row mb-3">
-                <label class="col-sm-3 col-form-label">Quantity</label>
-                <div class="col-sm-6">
-                    <input type="text" class="form-control" name="quantity" value="<?php echo $quantity; ?>">
+                    <input type="text" class="form-control" name="inv_id" value="<?php echo $inv_id; ?>">
                 </div>
             </div>
             <div class="row mb-3">
