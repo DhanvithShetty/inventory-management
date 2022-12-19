@@ -1,6 +1,6 @@
 <?php 
-if (isset($_GET["id"])){
-    $id = $_GET["id"];
+if (isset($_GET["sno"])){
+    $sno = $_GET["sno"];
 
     $servername = "localhost";
     $username = "root";
@@ -9,7 +9,7 @@ if (isset($_GET["id"])){
 
     $connection = new mysqli($servername, $username, $password, $database);
 
-    $sql = "DELETE FROM inventory WHERE inv_id = $id";
+    $sql = "DELETE FROM inventory WHERE `sno` = $sno";
     $connection->query($sql);
 
 }
