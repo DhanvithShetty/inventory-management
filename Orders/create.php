@@ -18,6 +18,7 @@ $errorMessage = "";
 $successMessage = "";
 
 if( $_SERVER['REQUEST_METHOD'] == 'POST' ) {
+    
     $item_id = $_POST['item_id'];
     $quantity = $_POST['quantity'];
     $date_of_purchase = $_POST['date_of_purchase'];
@@ -66,7 +67,7 @@ if( $_SERVER['REQUEST_METHOD'] == 'POST' ) {
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 </head>
-<body>
+<body style = "background: linear-gradient(40deg, #a1ffce, #faffd1)">
     <div class="container my-5">
         <h2>Add Order</h2>
         <?php

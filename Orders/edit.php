@@ -43,6 +43,7 @@ if( $_SERVER['REQUEST_METHOD'] == 'GET') {
     $vendor_name = $row["vendor_name"];
 
 }else{
+    
     $id = $_POST["id"];
     $item_id = $_POST['item_id'];
     $quantity = $_POST['quantity'];
@@ -88,9 +89,9 @@ if( $_SERVER['REQUEST_METHOD'] == 'GET') {
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 </head>
-<body>
+<body style = "background: linear-gradient(40deg, #a1ffce, #faffd1)">
     <div class="container my-5">
-        <h2>Add Item</h2>
+        <h2>Edit Order</h2>
         <?php
             if (!empty($errorMessage)) {
                 echo "

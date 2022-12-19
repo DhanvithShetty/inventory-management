@@ -6,11 +6,11 @@
     <title>Inventory Management</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css">
 </head>
-<body>
+<body style = "background: linear-gradient(40deg, #a1ffce, #faffd1)">
     <button class="btn btn-primary" onclick="location.href='../home.php'">Back</button>
     <div class = "container my-5">
-        <h2 class="text-center my-5">Orders Table</h2>
-        <a class="btn btn-primary mb-5" href="create.php" role="button">Add Item</a>
+        <h2 class="text-center my-5"><u>Orders Table</u></h2>
+        <a class="btn btn-primary mb-5" href="create.php" role="button">Add Order</a>
         <br>
         <table class="table">
             <thead>
