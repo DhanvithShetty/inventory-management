@@ -54,7 +54,7 @@ if( $_SERVER['REQUEST_METHOD'] == 'POST' ) {
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 </head>
-<body>
+<body style = "background: linear-gradient(40deg, #a1ffce, #faffd1)">
     <div class="container my-5">
         <h2>Add Item</h2>
         <?php
